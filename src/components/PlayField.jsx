@@ -9,9 +9,71 @@ class CardClass {
     }
 }
 
-export default function PlayField() {
+class Game {
+
+    constructor (setScore) {
+        this.setScore = setScore;
+        this.firstGuess = null;
+        this.secondGuess = null;
+        this.resolveQueue;
+    }
+
+    setGuess(guess) {
+        return new Promise ((resolve) => {
+            if(this.firstGuess == null) {
+                this.firstGuess = guess;
+                this.resolveQueue = resolve;
+            }
+            else {
+                this.secondGuess = guess;
+
+                const toBeReturned = {
+                    firstGuess: this.firstGuess,
+                    secondGuess: this.secondGuess
+                }
+
+                this.resolveQueue(toBeReturned);
+                resolve(toBeReturned);
+                this.isCorrect(toBeReturned);
+                this.clearGuesses();
+            }
+        });
+    }
+
+    async checkGuess(guess) {
+        const guesses = await this.setGuess(guess);
+        if(guesses.firstGuess === guesses.secondGuess) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    isCorrect({ firstGuess, secondGuess }) {
+        if (firstGuess === secondGuess) {
+            this.incrementScore();
+        }
+    }
+
+    clearGuesses() {
+        this.firstGuess = null;
+        this.secondGuess = null;
+        this.resolveQueue = null;
+    }
+
+    incrementScore() {
+        this.setScore((prev) => prev + 1);
+    }
+    
+}
+
+export default function PlayField( {setScore} ) {
 
     const [cards, setCards] = useState([]);
+    const dummy = new Game(setScore);
+
+    const [game, setGame] = useState(dummy);
 
     function shuffle(array) {
         const size = array.length;
@@ -60,7 +122,12 @@ export default function PlayField() {
             <div className="size-[34rem] bg-white rounded-2xl shadow-xl grid grid-cols-4 p-2 gap-2">
                 {cards.map((card, i) => {
                     return (
-                        <Card key = {i} card = {card}></Card>
+                        <Card 
+                            key = {i} 
+                            card = {card}
+                            game = {game}
+                            setGame = {setGame}
+                        ></Card>
                     )
                 })}
             </div>
