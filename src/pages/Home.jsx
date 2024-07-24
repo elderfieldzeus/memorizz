@@ -3,10 +3,8 @@ import PlayField from '../components/PlayField'
 
 function Home() {
 
-   
-
     return (
-        <div className='h-screen w-full bg-black text-white'>
+        <div className='h-screen w-full bg-primary text-white'>
             <Title></Title>
             <PlayField></PlayField>
         </div>
