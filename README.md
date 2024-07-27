@@ -1,8 +1,3 @@
-# React + Vite
+# Memorizz
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Welcome to Memorizz, an engaging and fun memory game designed to challenge and improve your memory skills! The game presents you with a grid of cards, each hiding a unique image. Your task is to find matching pairs by flipping two cards at a time, testing your recall abilities and concentration. Perfect for players of all ages, Memorizz offers various levels of difficulty to suit beginners and memory masters alike. Whether you're looking to sharpen your mind or just have some fun, Memorizz is the perfect game to keep you entertained and mentally agile.
